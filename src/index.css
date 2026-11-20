@@ -1,0 +1,202 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@layer base {
+  :root {
+    --theme-primary: #0f2744;
+    --theme-primary-hover: #16355c;
+    --theme-primary-deep: #091a30;
+    --theme-accent: #c59b27;
+    --theme-accent-dark: #a67f17;
+    --theme-accent-light: #e5c158;
+    --navy: var(--theme-primary);
+    --navy-deep: var(--theme-primary-deep);
+    --gold: var(--theme-accent);
+    --gold-dark: var(--theme-accent-dark);
+    --surface: #ffffff;
+    --canvas: #f8fafc;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  html,
+  body {
+    overscroll-behavior-y: contain;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--canvas);
+    color: #0f172a;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, .font-display {
+    font-family: 'Fraunces', Georgia, serif;
+  }
+
+  .font-mono-tabular {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 767px) {
+    input:not([type='checkbox']):not([type='radio']):not([type='file']),
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Official A4 Letter Print Rules */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm 18mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-modal-root {
+    position: static !important;
+    inset: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  .print-modal-card {
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+
+  .print-only-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+
+  .print-only-sheet thead {
+    display: table-header-group;
+  }
+
+  .print-only-sheet tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  @page kk-landscape {
+    size: A4 landscape;
+    margin: 10mm 12mm;
+  }
+
+  .print-landscape-sheet {
+    page: kk-landscape;
+  }
+}
+
+/* Fix Leaflet z-index stacking relative to app modals */
+.leaflet-container {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  z-index: 1;
+}
+
+.leaflet-control-layers {
+  border-radius: 0.5rem !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12) !important;
+  font-size: 12px;
+}
+
+.leaflet-control-scale-line {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: #0f2744 !important;
+  color: #0f2744 !important;
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+}
+
+/* Smooth Agenda Running Text Marquee */
+@keyframes village-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: village-marquee 42s linear infinite;
+  will-change: transform;
+}
+
+.marquee-viewport:hover .marquee-track,
+.marquee-track.is-paused {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-viewport {
+    overflow-x: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
+

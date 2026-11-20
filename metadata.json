@@ -1,0 +1,6 @@
+{
+  "name": "Portal Desa Margamukti - Sumedang Utara",
+  "description": "Sistem informasi dan layanan pemerintahan desa terpadu untuk Desa Margamukti, Kecamatan Sumedang Utara, Kabupaten Sumedang.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
